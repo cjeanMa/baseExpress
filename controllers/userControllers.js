@@ -64,10 +64,11 @@ const deleteUser = async (req=request, res = response) => {
     const { id } = req.params;
     
     //const user = await UserModel.findByIdAndDelete(id);
-
+    const userAuth = req.userAuth;
     const user = await UserModel.findByIdAndUpdate(id, {state: false})
 
     res.json({
+        userAuth,
         user
     });
 }

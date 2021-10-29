@@ -34,14 +34,15 @@ const UserSchema = Schema({
 
 //when we call the instanced object, it return toJSON function, and to handle this we can change of this way
 UserSchema.methods.toJSON = function(){
-    const {password, __v, ...user} = this.toObject();
+    const {password, __v, _id, ...user} = this.toObject();
+    user.uid = _id;
     return user;
 }
 
 //adding a method personalized
 UserSchema.methods.simple = function(){
-    const {password, ...user} = this.toObject();
-    return {password}
+    const {password, _id, ...user} = this.toObject();
+    return {uid:_id}
 }
 
 module.exports = model("User", UserSchema);
