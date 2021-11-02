@@ -76,6 +76,7 @@ const googleSignIn = async (req, res) =>{
        
     }
     catch(err){
+        console.log(err)
         res.status(400).json({
             ok: false,
             msg: "El Token no se pudo validar"
