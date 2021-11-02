@@ -29,7 +29,7 @@ router.post("/", [
 ], postUsers)
 router.delete("/:id", [
     validateJWT,
-    haveRol("SAILER_ROLE", "USER_ROLE"),
+    haveRol("SAILER_ROLE", "USER_ROLE", "ADMIN_ROLE"),
     check("id", "No es un ID válido").isMongoId(),
     check("id").custom(existUserById),
     validateFields
