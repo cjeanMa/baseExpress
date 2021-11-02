@@ -22,9 +22,8 @@
         function handleCredentialResponse(response) {
 
             const body = {"token_google": response.credential}
-
-            let url = `"http://localhost:8081/api/auth/google"`
-
+            //let url = `http://localhost:8081/api/auth/google`;
+            let url = `https://rest-node-jwt.herokuapp.com/api/auth/google`;
             fetch(url,{
                 method: "POST",
                 headers: {
