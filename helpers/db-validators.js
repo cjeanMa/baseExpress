@@ -1,28 +1,35 @@
-const RolModel = require("../models/rolModel");
-const UserModel = require("../models/userModel");
+const {Rol, User, Category} = require("../models");
 
 const RoleValidator = async(rol="")=>{
-    const existRol = await RolModel.findOne({ rol });
+    const existRol = await Rol.findOne({ rol });
     if(!existRol)
         throw new Error(`El rol ${rol} no existe`)
 }
 
 const EmailValidator = async(email="")=>{
-    const eEmail = await UserModel.findOne({ email })
+    const eEmail = await User.findOne({ email })
     if(eEmail){
         throw new Error(`El correo ${email} ya esta registrado`)
     }
 }
 
 const existUserById = async(id = "") =>{
-    const user = await UserModel.findById(id)
+    const user = await User.findById(id)
     if(!user){
         throw new Error(`El usuario no existe`)
+    }
+}
+
+const existCategoryId = async(id="") => {
+    const category = await Category.findById(id);
+    if(!category){
+        throw new Error("La categoria no existe")
     }
 }
 
 module.exports = {
     RoleValidator,
     EmailValidator,
-    existUserById
+    existUserById,
+    existCategoryId
 }
