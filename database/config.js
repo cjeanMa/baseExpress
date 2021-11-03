@@ -11,7 +11,6 @@ const dbConnection = async () =>{
         console.log("Conexion a BD exitosa")
     }
     catch(err){
-        console.log(err);
         throw new Error("Error al conectar con la base de datos")
     }
 }

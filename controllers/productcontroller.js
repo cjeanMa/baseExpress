@@ -42,7 +42,7 @@ const addProduct = async (req, res) => {
     try {
         const { price, category, description } = req.body;
         let name = req.body.name.toLowerCase();
-        const productDB = await Product.find({name});
+        const productDB = await Product.findOne({name});
         if(productDB){
             return res.status(400).json({
                 msg: "El producto ya existe en la BD"
