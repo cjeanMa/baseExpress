@@ -1,1 +1,0 @@
-### Directorio par almacenamiento de imagnes de lamnera local
