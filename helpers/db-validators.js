@@ -33,10 +33,19 @@ const existProductId = async(id="")=>{
         throw new Error("Producto no existe")
 }
 
+const allowCollectionUpdate = ( collection, allowCollections = []) => {
+    let validation = allowCollections.includes(collection);
+    if(!validation){
+        throw new Error(`Coleccion no valida. Colecciones validas ${allowCollections}`)
+    }
+    return validation;
+}
+
 module.exports = {
     RoleValidator,
     EmailValidator,
     existUserById,
     existCategoryId,
-    existProductId
+    existProductId,
+    allowCollectionUpdate
 }
