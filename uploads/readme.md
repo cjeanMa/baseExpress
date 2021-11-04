@@ -1,1 +1,1 @@
-### Directorio par almacenamiento de imagnes de lamnera local
+## carpeta para almacenar archivos de manera local
