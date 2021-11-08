@@ -3,7 +3,7 @@ const {getAllProducts,
         detailProduct,
         addProduct,
         updateProduct,
-        deleteProduct} = require("../controllers/productcontroller")
+        deleteProduct} = require("../controllers/productController")
 const { check } = require("express-validator");
 const { validateFields, validateJWT, haveRol } = require("../middlewares");
 const { existCategoryId, existProductId } = require("../helpers/db-validators");

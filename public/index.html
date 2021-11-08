@@ -6,48 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign in</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-    <h1>Server is working</h1>
-    <div id="g_id_onload" data-client_id="447242095874-rl67dsrir09oapdhhdpbg5fpjtb7es30.apps.googleusercontent.com" data-callback="handleCredentialResponse"
-        data-auto_prompt="false">
-    </div>
-    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
-        data-shape="rectangular" data-logo_alignment="left">
-    </div>
-    <button id="cSessionGoogle">Cerrar Sesion</button>
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Google Signin</h2>
+                <hr>
+                <div id="g_id_onload"
+                    data-client_id="447242095874-rl67dsrir09oapdhhdpbg5fpjtb7es30.apps.googleusercontent.com"
+                    data-callback="handleCredentialResponse" data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                    data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                </div>
+                <button class="btn btn-warning" id="cSessionGoogle">Cerrar Sesion</button>
+            </div>
+            <div class="col-md-6">
+                <h2>Login</h2>
+                <hr>
+                <form action="" class="d-grid">
+                    <input type="text" name="email" class="form-control mb-2" placeholder="Correo">
+                    <input type="password" name="password" class="form-control mb-2" placeholder="Contraseña">
+                    <button type="submit" class="btn btn-block btn-primary">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-        function handleCredentialResponse(response) {
-
-            const body = {"token_google": response.credential}
-            //let url = `http://localhost:8081/api/auth/google`;
-            let url = `https://rest-node-jwt.herokuapp.com/api/auth/google`;
-            fetch(url,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body:JSON.stringify(body)
-            })
-            .then( res => res.json())
-            .then(res => {
-                console.log(res);
-                localStorage.setItem("email", res.user.email)
-            })
-            .catch(err=> console.warn(err))
-        }
-
-        const btnClose = document.getElementById("cSessionGoogle");
-        btnClose.onclick = () =>{
-            google.accounts.id.disableAutoSelect()
-            google.accounts.id.revoke( localStorage.getItem( 'email' ), done =>{
-                localStorage.clear();
-                location.reload();
-            })
-        }
-    </script>
+    <script src="./js/auth.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,10 @@
+const http = require("http");
+const socket = require("socket.io");
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../database/config');
 const fileUpload = require('express-fileupload');
+const { socketController } = require("../sockets/socketController");
 class Server {
 
 
@@ -9,11 +12,16 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 80;
 
+        this.server = http.createServer(this.app);
+        this.io = socket(this.server);
+
         this.connDB();
 
         this.middleware();
 
         this.routes();
+
+        this.sockets();
     }
 
     async connDB(){
@@ -42,9 +50,13 @@ class Server {
         this.app.use("/api/upload", require("../routes/uploadRoutes"))
     }
 
+    sockets(){
+        this.io.on("connection", (socket) => socketController(socket, this.io));
+    }
+
     listen() {
 
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log(`listening to port ${this.port}`)
         })
     }
